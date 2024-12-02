@@ -41,14 +41,14 @@ class UserServiceImplTest {
     void testLoginSuccess() {
         // Mocking dependencies
         LoginInDTO loginInDTO = new LoginInDTO("testUser", "password123");
-        LoginOutDTO loginOutDTO = new LoginOutDTO(1, "test", "user", "test@example.com", "3", "username", "lastname", "id", "token", "type", "system");
+        LoginOutDTO loginOutDTO = new LoginOutDTO(1, "test", "user", "test@example.com", "3", "username", "lastname", "id", "testToken", "type", "system");
 
         when(saamfiClient.getUserLogin(loginInDTO)).thenReturn(loginOutDTO);
         when(saamfiJwtTools.tokenHasPermission("testToken", "ROLE_Access-system")).thenReturn(true);
         when(userRepository.findById(Long.parseLong("1"))).thenReturn(Optional.empty());
 
         // Simulating a new user save
-        doNothing().when(userRepository).save(any(User.class));
+        when(userRepository.save(any(User.class))).thenReturn(any(User.class));
 
         // Execute the method
         LoginOutDTO result = userService.login(loginInDTO);

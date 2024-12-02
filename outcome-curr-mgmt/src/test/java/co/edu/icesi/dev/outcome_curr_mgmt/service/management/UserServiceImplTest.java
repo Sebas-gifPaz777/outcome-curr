@@ -48,7 +48,7 @@ class UserServiceImplTest {
         when(userRepository.findById(Long.parseLong("1"))).thenReturn(Optional.empty());
 
         // Simulating a new user save
-        doNothing().when(userRepository).save(any(User.class));
+        when(userRepository.save(any(User.class))).thenReturn(any(User.class));
 
         // Execute the method
         LoginOutDTO result = userService.login(loginInDTO);

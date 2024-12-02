@@ -27,17 +27,6 @@ pipeline {
                 }
             }
         }
-        stage('Run Scheduler Simulation') {
-            steps {
-                script {
-                    dir('outcome-curr-mgmt'){
-                    sh '''
-                    mvn exec:java -Dexec.mainClass="co.edu.icesi.dev.outcome_curr_mgmt.service.management.scheduler.UserServiceScheduler"
-                    '''
-                    }
-                }
-            }
-        }
     }
     triggers {
         cron('H/15 * * * *') // Ejecutar el pipeline cada 15 minutos

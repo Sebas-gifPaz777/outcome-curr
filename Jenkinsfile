@@ -32,5 +32,3 @@ pipeline {
         cron('H/15 * * * *') // Ejecutar el pipeline cada 15 minutos
     }
 }
-
-}

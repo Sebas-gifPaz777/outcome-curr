@@ -1,8 +1,8 @@
 pipeline {
-    agent{
-        docker {
-            image 'maven:3.8.8-openjdk-17' 
-        }
+    agent any
+    
+      tools {
+        maven 'local_mvn' // Nombre configurado en Global Tool Configuration
     }
     stages {
         stage('Checkout') {

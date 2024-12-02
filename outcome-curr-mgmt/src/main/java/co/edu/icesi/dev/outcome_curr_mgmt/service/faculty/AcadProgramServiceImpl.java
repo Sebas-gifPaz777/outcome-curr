@@ -25,7 +25,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static co.edu.icesi.dev.outcome_curr_mgmt.service.perm_types.faculty.AcadProgramPermType.AcadProgramPermStatus.CURRENT;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @CacheConfig(cacheNames = {"acadProgram"})
@@ -47,19 +49,24 @@ public class AcadProgramServiceImpl implements AcadProgramService {
     @Transactional
     @Override
     public List<AcadProgram> getAcadProgramsByFaculty(long facultyId) {
+        log.info("Starting Get Program by Faculty Process");
         validateAccess(facultyId, 0L, UserPermAccess.QUERY, CURRENT);
         List<AcadProgram> products = acadProgramRepository.findAllByFacultyFacId(facultyId);
         //TODO validate the faculty exists instead of empty
         if (products.isEmpty()) {
+            log.error("There is no Programs by Faculty to show");
             throw new OutCurrException(OutCurrExceptionType.FACULTY_INVALID_FAC_ID);
         }
+        log.info(" Get Program by Faculty Process succesfully done");
         return products;
     }
 
     @Transactional
     @Override
     public AcadProgramOutDTO getAcadProgram(long facultyId, long acadProgramId) {
+        log.info("Starting Get Program Process");
         validateAccess(facultyId, acadProgramId, UserPermAccess.QUERY, CURRENT);
+        log.info("Get Program Process succesfully done");
         return acadProgramMapper.acadProgramToAcadProgramOutDto(findAcadProgram(facultyId, acadProgramId));
     }
 

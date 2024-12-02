@@ -51,10 +51,8 @@ pipeline {
         stage('Generate JaCoCo Report') {
             steps {
                 script {
-                    // Generar el reporte de cobertura de JaCoCo usando Maven dentro de un contenedor
                     sh 'docker run --rm -v $(pwd):/app -w /app maven:3.8.5-openjdk-17 ./mvnw jacoco:report'
                 }
-                // Publicar el reporte de cobertura JaCoCo
                 publishHTML(target: [
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,

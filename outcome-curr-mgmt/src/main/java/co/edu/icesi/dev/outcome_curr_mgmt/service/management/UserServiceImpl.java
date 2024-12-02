@@ -12,7 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -20,6 +22,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final SaamfiClient saamfiClient;
     private final SaamfiJwtTools saamfiJwtTools;
+
 
     @Transactional
     @Override
@@ -30,6 +33,7 @@ public class UserServiceImpl implements UserService {
             throw new OutCurrException(OutCurrExceptionType.USER_INVALID_PERMISSIONS);
         }
 
+
         if (userRepository.findById(loginOutDTO.userId()).isEmpty()){
             User userEntity = User.builder()
                     .usrId(loginOutDTO.userId())
@@ -39,7 +43,7 @@ public class UserServiceImpl implements UserService {
                     .build();
             userRepository.save(userEntity);
         }
-
+        log.info("User has made login succesfully!");
         return loginOutDTO;
     }
 

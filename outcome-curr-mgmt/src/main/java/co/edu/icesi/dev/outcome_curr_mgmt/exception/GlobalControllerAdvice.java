@@ -1,5 +1,7 @@
 package co.edu.icesi.dev.outcome_curr_mgmt.exception;
 
+import org.slf4j.MDC;
+import lombok.extern.slf4j.Slf4j;
 import co.edu.icesi.dev.outcome_curr_mgmt.model.enums.InfoError;
 import co.edu.icesi.dev.outcome_curr_mgmt.model.response.OutcomeCurrApplicationError;
 import co.edu.icesi.dev.outcome_curr_mgmt.model.response.OutcomeCurrApplicationErrorDetail;
@@ -23,6 +25,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
 
@@ -30,6 +33,12 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
   @ExceptionHandler(value = {OutCurrException.class})
   public ResponseEntity<OutcomeCurrApplicationError> handleOutCurrException(
           OutCurrException outCurrException) {
+    // Añadir contexto al MDC
+    MDC.put("exceptionType", "OutCurrException");
+    MDC.put("errorCode", String.valueOf(outCurrException.getOutCurrExceptionType().getCode()));
+    MDC.put("responseStatus", String.valueOf(outCurrException.getOutCurrExceptionType().getResponseStatus()));
+    log.error("Handled OutCurrException: {}", outCurrException.getMessage(), outCurrException);
+    MDC.clear();
     OutcomeCurrApplicationError body = OutcomeCurrApplicationError.builder()
         .code(outCurrException.getOutCurrExceptionType().getCode()+"")
         .message(outCurrException.getMessage())
@@ -40,9 +49,28 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
     return new ResponseEntity<>(body, body.getStatus());
   }
 
+  @ExceptionHandler(Exception.class)
+  public ResponseEntity<String> handleGeneralException(Exception ex) {
+    // Manejo genérico
+    MDC.put("errorType", ex.getClass().getSimpleName());
+    MDC.put("errorMessage", ex.getMessage());
+
+    log.error("Exception occurred", ex);
+
+    MDC.clear();
+
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body("An unexpected error occurred. Please try again later.");
+  }
+
   @Override
   protected ResponseEntity<Object> handleMissingPathVariable
       (MissingPathVariableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    MDC.put("exceptionType", "MissingPathVariableException");
+    MDC.put("pathVariable", ex.getVariableName());
+    MDC.put("responseStatus", String.valueOf(HttpStatus.BAD_REQUEST.value()));
+    log.warn("Handled MissingPathVariableException: {}", ex.getVariableName(), ex);
+    MDC.clear();
     OutcomeCurrApplicationError body = OutcomeCurrApplicationError.builder()
         .code(InfoError.MISSING_PATH_VARIABLE.getCode())
         .message(ex.getVariableName() + InfoError.MISSING_PATH_VARIABLE.getMessage())
@@ -56,6 +84,12 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
   @Override
   protected ResponseEntity<Object> handleMissingServletRequestParameter
       (MissingServletRequestParameterException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    MDC.put("exceptionType", "MissingServletRequestParameterException");
+    MDC.put("parameterName", ex.getParameterName());
+    MDC.put("responseStatus", String.valueOf(HttpStatus.BAD_REQUEST.value()));
+
+    log.warn("Handled MissingServletRequestParameterException: {}", ex.getParameterName(), ex);
+
     OutcomeCurrApplicationError body = OutcomeCurrApplicationError.builder()
         .code(InfoError.MISSING_REQUEST_PARAMETER.getCode())
         .message(ex.getParameterName() + InfoError.MISSING_REQUEST_PARAMETER.getMessage())

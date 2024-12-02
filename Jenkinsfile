@@ -21,7 +21,9 @@ pipeline {
         stage('Run Specific Tests') {
             steps {
                 script {
-                    sh "mvn -Dtest=${TEST_CLASSES} test"
+                    dir('outcome-curr-mgmt'){
+                         sh "mvn -Dtest=${TEST_CLASSES} test"
+                     }
                 }
             }
         }

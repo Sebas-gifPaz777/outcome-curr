@@ -10,11 +10,13 @@ import co.edu.icesi.dev.outcome_curr_mgmt.model.entity.management.User;
 import co.edu.icesi.dev.outcome_curr_mgmt.persistence.management.UserRepository;
 import co.edu.icesi.dev.outcome_curr_mgmt.saamfi.delegate.SaamfiClient;
 import co.edu.icesi.dev.outcome_curr_mgmt.saamfi.util.SaamfiJwtTools;
+import co.edu.icesi.dev.outcome_curr_mgmt.service.management.scheduler.UserServiceScheduler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
@@ -32,9 +34,13 @@ class UserServiceImplTest {
     @Mock
     private SaamfiJwtTools saamfiJwtTools;
 
+    @Autowired
+    private UserServiceScheduler userServiceScheduler;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        userServiceScheduler = new UserServiceScheduler(userService);
     }
 
     @Test
@@ -52,6 +58,8 @@ class UserServiceImplTest {
 
         // Execute the method
         LoginOutDTO result = userService.login(loginInDTO);
+
+        userServiceScheduler.testLogin();
 
         // Validate results
         assertNotNull(result);

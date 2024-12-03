@@ -41,11 +41,11 @@ public interface AuthPerfLvlController {
     String ADMIN_ACAD_PROGRAM_REQUIRED = "A permission of Admin-***-acad_program or superior is required for this operation";
 
     @GetMapping("/{perfLvlId}")
-    @PreAuthorize("hasAnyRole('"+ROLE_QUERY_FUTURE_ACADPROGRAMS_ANY+"','"+ROLE_QUERY_FUTURE_ACADPROGRAMS_FAC+"',"
-            + "'"+ROLE_QUERY_FUTURE_ACADPROGRAMS_OWN+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_ANY+"',"
-            +"'"+ROLE_QUERY_CURRENT_ACADPROGRAMS_FAC+"','"+ROLE_QUERY_CURRENT_ACADPROGRAMS_OWN+"',"
-            +"'"+ROLE_QUERY_INACTIVE_ACADPROGRAMS_ANY+"','"+ROLE_QUERY_INACTIVE_ACADPROGRAMS_FAC+"',"
-            +"'"+ROLE_QUERY_INACTIVE_ACADPROGRAMS_OWN+"')")
+    //@PreAuthorize("hasAnyRole('"+ROLE_QUERY_FUTURE_ACADPROGRAMS_ANY+"','"+ROLE_QUERY_FUTURE_ACADPROGRAMS_FAC+"',"
+    //        + "'"+ROLE_QUERY_FUTURE_ACADPROGRAMS_OWN+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_ANY+"',"
+    //       +"'"+ROLE_QUERY_CURRENT_ACADPROGRAMS_FAC+"','"+ROLE_QUERY_CURRENT_ACADPROGRAMS_OWN+"',"
+    //       +"'"+ROLE_QUERY_INACTIVE_ACADPROGRAMS_ANY+"','"+ROLE_QUERY_INACTIVE_ACADPROGRAMS_FAC+"',"
+    //        +"'"+ROLE_QUERY_INACTIVE_ACADPROGRAMS_OWN+"')")
     @ApiOperation("Get a Performance Level by Id")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
@@ -58,11 +58,11 @@ public interface AuthPerfLvlController {
     PerfLvlOutDTO getPerfLvl(@PathVariable long perfLvlId,@PathVariable long acadProgId,@PathVariable long facultyId);
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('"+ROLE_QUERY_FUTURE_ACADPROGRAMS_ANY+"','"+ROLE_QUERY_FUTURE_ACADPROGRAMS_FAC+"',"
-            + "'"+ROLE_QUERY_FUTURE_ACADPROGRAMS_OWN+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_ANY+"',"
-            +"'"+ROLE_QUERY_CURRENT_ACADPROGRAMS_FAC+"','"+ROLE_QUERY_CURRENT_ACADPROGRAMS_OWN+"',"
-            +"'"+ROLE_QUERY_INACTIVE_ACADPROGRAMS_ANY+"','"+ROLE_QUERY_INACTIVE_ACADPROGRAMS_FAC+"',"
-            +"'"+ROLE_QUERY_INACTIVE_ACADPROGRAMS_OWN+"')")
+    //@PreAuthorize("hasAnyRole('"+ROLE_QUERY_FUTURE_ACADPROGRAMS_ANY+"','"+ROLE_QUERY_FUTURE_ACADPROGRAMS_FAC+"',"
+    //        + "'"+ROLE_QUERY_FUTURE_ACADPROGRAMS_OWN+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_ANY+"',"
+    //        +"'"+ROLE_QUERY_CURRENT_ACADPROGRAMS_FAC+"','"+ROLE_QUERY_CURRENT_ACADPROGRAMS_OWN+"',"
+    //        +"'"+ROLE_QUERY_INACTIVE_ACADPROGRAMS_ANY+"','"+ROLE_QUERY_INACTIVE_ACADPROGRAMS_FAC+"',"
+    //       +"'"+ROLE_QUERY_INACTIVE_ACADPROGRAMS_OWN+"')")
     @ApiOperation("Get the Performance Levels from an Academic Program")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
@@ -74,11 +74,11 @@ public interface AuthPerfLvlController {
     List<PerfLvlOutDTO> getAllPerfLvls(@PathVariable long acadProgId,@PathVariable long facultyId);
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_ANY+"','"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_FAC+"',"
-            + "'"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_OWN+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_ANY+"',"
-            + "'"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_FAC+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_OWN+"',"
-            + "'"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_ANY+"','"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_FAC+"',"
-            + "'"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_OWN+"')")
+    //@PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_ANY+"','"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_FAC+"',"
+    //        + "'"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_OWN+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_ANY+"',"
+    //       + "'"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_FAC+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_OWN+"',"
+    //        + "'"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_ANY+"','"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_FAC+"',"
+    //        + "'"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_OWN+"')")
     @Operation(summary = "Create a new Performance Level for an Academic Program")
     @ApiResponses({@ApiResponse(responseCode = "200", content = {
             @Content(schema = @Schema(implementation = PerfLvlOutDTO.class, $comment = OK), mediaType = "application/json")}),
@@ -91,11 +91,11 @@ public interface AuthPerfLvlController {
             @PathVariable long facultyId);
 
     @PutMapping("/{perfLvlId}")
-    @PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_ANY+"','"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_FAC+"',"
-            + "'"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_OWN+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_ANY+"',"
-            + "'"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_FAC+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_OWN+"',"
-            + "'"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_ANY+"','"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_FAC+"',"
-            + "'"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_OWN+"')")
+    //@PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_ANY+"','"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_FAC+"',"
+    //        + "'"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_OWN+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_ANY+"',"
+    //        + "'"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_FAC+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_OWN+"',"
+    //       + "'"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_ANY+"','"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_FAC+"',"
+    //       + "'"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_OWN+"')")
     @Operation(summary = "Update a Performance Level for an Academic Program")
     @ApiResponses({@ApiResponse(responseCode = "200", content = {
             @Content(schema = @Schema(implementation = PerfLvlOutDTO.class, $comment = OK), mediaType = "application/json")}),
@@ -109,11 +109,11 @@ public interface AuthPerfLvlController {
 
 
     @DeleteMapping("/{perfLvlId}")
-    @PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_ANY+"','"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_FAC+"',"
-            + "'"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_OWN+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_ANY+"',"
-            + "'"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_FAC+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_OWN+"',"
-            + "'"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_ANY+"','"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_FAC+"',"
-            + "'"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_OWN+"')")
+    //@PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_ANY+"','"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_FAC+"',"
+    //        + "'"+ROLE_ADMIN_FUTURE_ACADPROGRAMS_OWN+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_ANY+"',"
+    //       + "'"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_FAC+"','"+ROLE_ADMIN_CURRENT_ACADPROGRAMS_OWN+"',"
+    //        + "'"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_ANY+"','"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_FAC+"',"
+    //        + "'"+ROLE_ADMIN_INACTIVE_ACADPROGRAMS_OWN+"')")
     @Operation(summary = "Delete a Performance Level for an Academic Program")
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Performance LEVEL deleted"),

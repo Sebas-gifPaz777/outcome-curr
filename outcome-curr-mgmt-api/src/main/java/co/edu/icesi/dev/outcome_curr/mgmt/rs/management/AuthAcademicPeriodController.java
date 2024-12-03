@@ -40,7 +40,7 @@ public interface AuthAcademicPeriodController {
     String UN_AUTHORIZED = "User credentials are needed for this request";
 
     @PostMapping("/")
-    @PreAuthorize("hasAnyRole('ROLE_Admin-per-state')")
+    //@PreAuthorize("hasAnyRole('ROLE_Admin-per-state')")
     @Operation(summary = "Create academic period")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
@@ -72,7 +72,7 @@ public interface AuthAcademicPeriodController {
     List<AcadPeriodOutDTO> getAllAcademicPeriods();
 
     @PutMapping("/{acadPeriodId}")
-    @PreAuthorize("hasAnyRole('ROLE_Admin-per-state')")
+    //@PreAuthorize("hasAnyRole('ROLE_Admin-per-state')")
     @Operation(summary = "Edit academic period")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
@@ -92,7 +92,7 @@ public interface AuthAcademicPeriodController {
 
 
     @DeleteMapping("/{acadPeriodId}")
-    @PreAuthorize("hasAnyRole('ROLE_Admin-per-state')")
+    //@PreAuthorize("hasAnyRole('ROLE_Admin-per-state')")
     @Operation(summary = "Delete academic period")
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Academic period delete"),

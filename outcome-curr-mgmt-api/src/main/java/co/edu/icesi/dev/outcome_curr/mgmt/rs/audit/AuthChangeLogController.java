@@ -28,7 +28,7 @@ public interface AuthChangeLogController {
 
     String BAD_REQUEST="Date in filter has invalid format";
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_Query-changelog')")
+    //@PreAuthorize("hasAnyRole('ROLE_Query-changelog')")
     @Operation(summary = "Get the changes in ChangeLog")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
@@ -38,7 +38,7 @@ public interface AuthChangeLogController {
     })
     List<ChangeLogOutDTO> getAllChanges();
     @GetMapping("/filter")
-    @PreAuthorize("hasAnyRole('ROLE_Query-changelog')")
+    //@PreAuthorize("hasAnyRole('ROLE_Query-changelog')")
     @Operation(summary = "Get the changes in ChangeLog according to the filter")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {

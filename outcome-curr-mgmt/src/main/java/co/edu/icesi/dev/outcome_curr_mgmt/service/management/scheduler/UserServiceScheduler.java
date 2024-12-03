@@ -13,15 +13,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserServiceScheduler {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
-    public UserServiceScheduler(UserServiceImpl userService) {
+
+    public UserServiceScheduler(UserService userService ) {
         this.userService = userService;
+
     }
 
-    @Scheduled(fixedRate = 60000) // Ejecuta cada 60 segundos
+    @Scheduled(fixedDelay = 60000) // Ejecuta cada 60 segundos
     public void testLogin() {
-        LoginInDTO loginInDTO = new LoginInDTO("OutCurrTestUser", "123456");
+        LoginInDTO loginInDTO = new LoginInDTO("16929585", "123456");
         try {
             LoginOutDTO loginOutDTO = userService.login(loginInDTO);
             log.info("Scheduler executed successfully: {}", loginOutDTO);

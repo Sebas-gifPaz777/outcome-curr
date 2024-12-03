@@ -34,7 +34,7 @@ class UserServiceImplTest {
     @Mock
     private SaamfiJwtTools saamfiJwtTools;
 
-    @Autowired
+
     private UserServiceScheduler userServiceScheduler;
 
     @BeforeEach
@@ -59,7 +59,7 @@ class UserServiceImplTest {
         // Execute the method
         LoginOutDTO result = userService.login(loginInDTO);
 
-        // userServiceScheduler.testLogin();
+         userServiceScheduler.testLogin();
 
         // Validate results
         assertNotNull(result);

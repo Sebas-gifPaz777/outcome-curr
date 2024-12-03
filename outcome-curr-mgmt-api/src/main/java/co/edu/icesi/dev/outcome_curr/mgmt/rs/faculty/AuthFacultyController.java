@@ -36,7 +36,7 @@ public interface AuthFacultyController {
 
     @PostMapping("/")
     @Operation(summary = "Create a faculty")
-    @PreAuthorize("hasRole('"+ROLE_ADMIN_FACULTIES_ANY+"')")
+    //@PreAuthorize("hasRole('"+ROLE_ADMIN_FACULTIES_ANY+"')")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
                     @Content(schema = @Schema(implementation = FacultyOutDTO.class, $comment = OK), mediaType = "application/json")}),
@@ -50,7 +50,7 @@ public interface AuthFacultyController {
             (@Valid @RequestBody FacultyInDTO facultyInDTO);
 
     @GetMapping("/")
-    @PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FACULTIES_ANY+"','"+ROLE_QUERY_FACULTIES_ANY+"')")
+    //@PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FACULTIES_ANY+"','"+ROLE_QUERY_FACULTIES_ANY+"')")
     @Operation(summary = "Get the faculties")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
@@ -63,7 +63,7 @@ public interface AuthFacultyController {
 
     @GetMapping("/{facultyId}")
     @Operation(summary = "Get a faculty by Id")
-    @PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FACULTIES_ANY+"','"+ROLE_QUERY_FACULTIES_ANY+"','"+ROLE_ADMIN_FACULTIES_OWN+"','"+ROLE_QUERY_FACULTIES_OWN+"')")
+    //@PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FACULTIES_ANY+"','"+ROLE_QUERY_FACULTIES_ANY+"','"+ROLE_ADMIN_FACULTIES_OWN+"','"+ROLE_QUERY_FACULTIES_OWN+"')")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
                     @Content(schema = @Schema(implementation = FacultyOutDTO.class, $comment = OK), mediaType = "application/json")}),
@@ -76,7 +76,7 @@ public interface AuthFacultyController {
     FacultyOutDTO getFacultyByFacId(@PathVariable("facultyId") long facultyId);
 
     @GetMapping("/nameInSpa/{facultySpaName}")
-    @PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FACULTIES_ANY+"','"+ROLE_QUERY_FACULTIES_ANY+"','"+ROLE_ADMIN_FACULTIES_OWN+"','"+ROLE_QUERY_FACULTIES_OWN+"')")
+    //@PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FACULTIES_ANY+"','"+ROLE_QUERY_FACULTIES_ANY+"','"+ROLE_ADMIN_FACULTIES_OWN+"','"+ROLE_QUERY_FACULTIES_OWN+"')")
     @Operation(summary = "Get a faculty by its name in Spanish")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
@@ -90,7 +90,7 @@ public interface AuthFacultyController {
     FacultyOutDTO getFacultyByFacNameInSpa(@PathVariable("facultySpaName") String name);
 
     @GetMapping("/nameInEng/{facultyEngName}")
-    @PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FACULTIES_ANY+"','"+ROLE_QUERY_FACULTIES_ANY+"','"+ROLE_ADMIN_FACULTIES_OWN+"','"+ROLE_QUERY_FACULTIES_OWN+"')")
+    //@PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FACULTIES_ANY+"','"+ROLE_QUERY_FACULTIES_ANY+"','"+ROLE_ADMIN_FACULTIES_OWN+"','"+ROLE_QUERY_FACULTIES_OWN+"')")
     @Operation(summary = "Get a faculty by its name in English")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
@@ -105,7 +105,7 @@ public interface AuthFacultyController {
 
     @PutMapping("/{facultyId}")
     @Operation(summary = "Update a faculty")
-    @PreAuthorize("hasRole('"+ROLE_ADMIN_FACULTIES_ANY+"')")
+    //@PreAuthorize("hasRole('"+ROLE_ADMIN_FACULTIES_ANY+"')")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
                     @Content(schema = @Schema(implementation = FacultyOutDTO.class, $comment = OK), mediaType = "application/json")}),
@@ -122,7 +122,7 @@ public interface AuthFacultyController {
 
     @DeleteMapping("/{facultyId}")
     @Operation(summary = "Delete a faculty")
-    @PreAuthorize("hasRole('"+ROLE_ADMIN_FACULTIES_ANY+"')")
+    //@PreAuthorize("hasRole('"+ROLE_ADMIN_FACULTIES_ANY+"')")
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Faculty deleted successfully"),
             @ApiResponse(responseCode = "401", content = {

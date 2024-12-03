@@ -12,6 +12,7 @@ import co.edu.icesi.dev.outcome_curr_mgmt.service.perm_types.faculty.AcadProgram
 import co.edu.icesi.dev.outcome_curr_mgmt.service.provider.faculty.FacultyProvider;
 import co.edu.icesi.dev.outcome_curr_mgmt.service.validator.faculty.AcadProgramValidator;
 import co.edu.icesi.dev.outcome_curr_mgmt.service.validator.faculty.UserPermAccess;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,9 @@ public class AcadProgramServiceImpl implements AcadProgramService {
 
     private final AcadProgramMapper acadProgramMapper;
 
+    private final MeterRegistry meterRegistry;
+
+
     //TODO the program should not assume the operations are for CURRENT programs. It should also support Future
     // and Inactive, filterin according to the parameter used as input. Use the logger for errors.
 
@@ -50,14 +54,20 @@ public class AcadProgramServiceImpl implements AcadProgramService {
     @Override
     public List<AcadProgram> getAcadProgramsByFaculty(long facultyId) {
         log.info("Starting Get Program by Faculty Process");
-        validateAccess(facultyId, 0L, UserPermAccess.QUERY, CURRENT);
+
+        meterRegistry.counter("faculty.programs.requests", "facultyId", String.valueOf(facultyId)).increment();
+
         List<AcadProgram> products = acadProgramRepository.findAllByFacultyFacId(facultyId);
-        //TODO validate the faculty exists instead of empty
+
+
+
         if (products.isEmpty()) {
             log.error("There is no Programs by Faculty to show");
+            meterRegistry.counter("faculty.programs.errors", "facultyId", String.valueOf(facultyId)).increment();
             throw new OutCurrException(OutCurrExceptionType.FACULTY_INVALID_FAC_ID);
         }
-        log.info(" Get Program by Faculty Process succesfully done");
+
+        log.info("Get Program by Faculty Process successfully done");
         return products;
     }
 

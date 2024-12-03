@@ -49,7 +49,7 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
     return new ResponseEntity<>(body, body.getStatus());
   }
 
-  @ExceptionHandler(Exception.class)
+  @ExceptionHandler(value ={Exception.class})
   public ResponseEntity<String> handleGeneralException(Exception ex) {
     // Manejo genérico
     MDC.put("errorType", ex.getClass().getSimpleName());

@@ -33,7 +33,7 @@ public interface BannerFacultyImportController {
 
     @GetMapping("/")
     @Operation(summary = "Get the list of all faculties in banner")
-    @PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FACULTIES_ANY+"','"+ROLE_QUERY_FACULTIES_ANY+"')")
+    //@PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FACULTIES_ANY+"','"+ROLE_QUERY_FACULTIES_ANY+"')")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
                     @Content(schema = @Schema(implementation = FacultyOutDTO.class, $comment = OK), mediaType = "application/json")}),
@@ -49,7 +49,7 @@ public interface BannerFacultyImportController {
 
     @GetMapping("/page")
     @Operation(summary = "Get a page of faculties in banner")
-    @PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FACULTIES_ANY+"','"+ROLE_QUERY_FACULTIES_ANY+"')")
+    //@PreAuthorize("hasAnyRole('"+ROLE_ADMIN_FACULTIES_ANY+"','"+ROLE_QUERY_FACULTIES_ANY+"')")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
                     @Content(schema = @Schema(implementation = FacultyOutDTO.class, $comment = OK), mediaType = "application/json")}),
@@ -68,7 +68,7 @@ public interface BannerFacultyImportController {
 
     @PostMapping("/")
     @Operation(summary = "Import a faculty")
-    @PreAuthorize("hasRole('"+ROLE_ADMIN_FACULTIES_ANY+"')")
+    //@PreAuthorize("hasRole('"+ROLE_ADMIN_FACULTIES_ANY+"')")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
                     @Content(schema = @Schema(implementation = FacultyOutDTO.class, $comment = OK), mediaType = "application/json")}),

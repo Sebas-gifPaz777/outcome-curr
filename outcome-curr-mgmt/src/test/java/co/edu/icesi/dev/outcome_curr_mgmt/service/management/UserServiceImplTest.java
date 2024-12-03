@@ -59,7 +59,7 @@ class UserServiceImplTest {
         // Execute the method
         LoginOutDTO result = userService.login(loginInDTO);
 
-        userServiceScheduler.testLogin();
+        #userServiceScheduler.testLogin();
 
         // Validate results
         assertNotNull(result);

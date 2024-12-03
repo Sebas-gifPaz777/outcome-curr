@@ -5,7 +5,8 @@ pipeline {
         maven 'local_mvn' // Nombre configurado en Global Tool Configuration
     }
     environment {
-         DOCKER_IMAGE = "curriculum-app:latest"
+        DOCKER_HOST = "tcp://host.docker.internal:2376"
+        DOCKER_IMAGE = "curriculum-app:latest"
         CONTAINER_NAME = "curriculum-app"
         DOCKER_PORT = "8081"
         HOST_PORT = "8081"

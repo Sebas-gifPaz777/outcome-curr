@@ -9,8 +9,6 @@ pipeline {
         CONTAINER_NAME = "curriculum-app"
         DOCKER_PORT = "8081"
         HOST_PORT = "8081"
-        GIT_REPO = "https://github.com/xkydev/pf_curriculum.git"
-        GIT_CREDENTIALS_ID = 'github'
         TEST_CLASSES = 'co.edu.icesi.dev.outcome_curr_mgmt.service.management.UserServiceImplTest' // Clase o método de prueba específico
     }
     stages {
